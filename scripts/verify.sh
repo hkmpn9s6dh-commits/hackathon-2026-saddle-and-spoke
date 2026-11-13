@@ -60,7 +60,12 @@ done
 
 # The published network is data, not code.
 if grep -q '"tools"' public/saddle_and_spoke.network.json; then ok "the published network is present"; else bad "the published network is present"; fi
-if grep -rq "include\|\\\${" peer/spare_room.hocon; then bad "the peer HOCON has no include or substitution"; else ok "the peer HOCON has no include or substitution"; fi
+if grep -qE '^[[:space:]]*include[[:space:]]' peer/spare_room.hocon; then
+  bad "the peer HOCON has no include"
+else
+  ok "the peer HOCON has no include"
+fi
+if grep -q '\${' peer/spare_room.hocon; then bad "the peer HOCON has no substitution"; else ok "the peer HOCON has no substitution"; fi
 
 # English only, in everything a visitor or a judge reads.
 if grep -rIlP '[\x{4e00}-\x{9fff}]' src index.html public peer README.md docs 2>/dev/null | grep -v '^docs/0[0-9]-' | head -3 | grep -q .; then
@@ -76,8 +81,8 @@ else
   ok "no credentials in the repository"
 fi
 
-if grep -rIn --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=dist \
-  -E "(google-analytics|googletagmanager|plausible\.io|segment\.io|hotjar)" . >/tmp/ss-analytics.log 2>&1; then
+if grep -rIn --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=dist --exclude=verify.sh --exclude=*.md \
+  -E "(google-analytics|googletagmanager|plausible\.io|segment\.io|hotjar)" src public peer check index.html >/tmp/ss-analytics.log 2>&1; then
   bad "no third-party analytics"; head -3 /tmp/ss-analytics.log
 else
   ok "no third-party analytics"

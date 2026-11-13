@@ -4,7 +4,8 @@ import { buildNetwork, peerNetworkName, peerSiteBase } from "../src/runtime/netw
 import { parseHocon, parseNetworkSource } from "../src/runtime/hocon.js";
 
 const networkFile = readFileSync(new URL("../public/saddle_and_spoke.network.json", import.meta.url), "utf8");
-const peerHocon = readFileSync(new URL("../peer/spare_room.hocon", import.meta.url), "utf8");
+// A clone on Windows may check these out with CRLF, which is not part of the data.
+const peerHocon = readFileSync(new URL("../peer/spare_room.hocon", import.meta.url), "utf8").replace(/\r\n/g, "\n");
 const peerJson = readFileSync(new URL("../peer/spare_room.network.json", import.meta.url), "utf8");
 const broken = readFileSync(new URL("../public/lab/broken.network.json", import.meta.url), "utf8");
 
@@ -153,7 +154,7 @@ describe("HOCON", () => {
 
   it("gives the same graph as the JSON serialisation", () => {
     const fromHocon = parseHocon(peerHocon);
-    const fromJson = JSON.parse(peerJson);
+    const fromJson = JSON.parse(peerJson.replace(/\r\n/g, "\n"));
     expect(fromHocon).toEqual(fromJson);
   });
 
