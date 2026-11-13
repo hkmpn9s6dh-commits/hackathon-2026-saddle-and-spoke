@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "networks": {
+    "saddle_and_spoke": {
+      "spare_room": "https://cdn.jsdelivr.net/gh/hkmpn9s6dh-commits/hackathon-2026-saddle-and-spoke@main/peer/spare_room"
+    }
+  }
+}

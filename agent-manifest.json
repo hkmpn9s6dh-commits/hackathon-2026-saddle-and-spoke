@@ -1,0 +1,97 @@
+{
+  "brand": "Saddle & Spoke",
+  "site": {
+    "name": "Saddle & Spoke",
+    "kind": "bicycle workshop",
+    "address": "11 Quay Street, Saltcoats",
+    "hours": "Thursday 16:00–20:00, Saturday 09:00–13:00",
+    "description": "A two-bench repair workshop that publishes its job sheet as an agent network."
+  },
+  "networks": [
+    {
+      "name": "saddle_and_spoke",
+      "front_man": "front_desk",
+      "hocon": "./saddle_and_spoke.network.json",
+      "description": "Describe a fault, get a diagnosis, a price and a drop-off slot written onto the shop's job sheet.",
+      "tags": [
+        "deployed",
+        "static",
+        "workshop"
+      ],
+      "sample_queries": [
+        "Third gear jumps when I push hard uphill.",
+        "The front brake rubs after I put the wheel back on.",
+        "I'm doing a 200 km ride in three weeks. What does the bike need?"
+      ]
+    }
+  ],
+  "llm_router": {
+    "base_url": "replay://local",
+    "model": "recorded-session",
+    "mock": true,
+    "byok_router": "https://api.openai.com/v1",
+    "note": "No funded inference endpoint is published. Without a visitor key the site replays a recorded session through the real runtime; with a key it calls the visitor's own OpenAI-compatible router and that router's model. See docs/03-INFERENCE.md."
+  },
+  "allowed_peers": [
+    "https://cdn.jsdelivr.net/gh/hkmpn9s6dh-commits/hackathon-2026-saddle-and-spoke@main/peer/spare_room",
+    "https://raw.githubusercontent.com/hkmpn9s6dh-commits/hackathon-2026-saddle-and-spoke/main/peer/spare_room"
+  ],
+  "peer_policy": {
+    "mode": "allowlist",
+    "allow_origins": [
+      "https://cdn.jsdelivr.net",
+      "https://raw.githubusercontent.com",
+      "http://127.0.0.1:5174",
+      "http://localhost:5174"
+    ],
+    "deny_origins": [],
+    "note": "The parts co-op is the only third party this shop talks to. The two loopback origins exist so the same build can be verified offline; nothing else is allowed."
+  },
+  "theme": {
+    "primary": "#b4441f",
+    "paper": "#f4f1ea",
+    "ink": "#1e1b18"
+  },
+  "linking": {
+    "protocol": "nsdeploy-link/v1",
+    "exports": [
+      {
+        "network": "saddle_and_spoke",
+        "front_man": "front_desk",
+        "aliases": [
+          "saddle_and_spoke",
+          "front_desk",
+          "saddle"
+        ],
+        "url": "saddle_and_spoke"
+      }
+    ],
+    "link_updates": {
+      "mode": "browser-local"
+    }
+  },
+  "actions": {
+    "version": 1,
+    "agentTools": [
+      "read_job",
+      "read_catalogue",
+      "highlight_part",
+      "record_finding",
+      "add_part_to_bench",
+      "quote_labour",
+      "propose_slot",
+      "book_dropoff",
+      "order_part",
+      "lookup_job"
+    ],
+    "note": "Registered by the page at boot. The live catalog, with effects and JSON Schemas, is in the Inspector drawer of the site and listed in docs/02-ACTIONS.md."
+  },
+  "deployment": {
+    "mode": "static",
+    "self_contained_runtime": true,
+    "browser_mock": true,
+    "direct_byok": true,
+    "direct_mcp_requires_cors": true,
+    "public_mcp_facade": false
+  }
+}

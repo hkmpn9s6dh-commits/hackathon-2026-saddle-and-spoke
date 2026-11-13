@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agentic Web conformance checker</title>
+<meta name="description" content="Point this at any agentic website and it reports which of the seven interoperability checks from MVP Profile 0.2 it can observe from the outside.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f2eee4'/%3E%3Cpath d='M7 22l5-9h8l-4 9z' fill='none' stroke='%23b4441f' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='9' cy='24' r='3' fill='none' stroke='%231c1916' stroke-width='2'/%3E%3Ccircle cx='23' cy='24' r='3' fill='none' stroke='%231c1916' stroke-width='2'/%3E%3C/svg%3E">
+  <script type="module" crossorigin src="../assets/check-CSqct5rn.js"></script>
+  <link rel="modulepreload" crossorigin href="../assets/network-BNotpZlp.js">
+  <link rel="stylesheet" crossorigin href="../assets/network-DrygHQJF.css">
+  <link rel="stylesheet" crossorigin href="../assets/check-yBwmuinj.css">
+</head>
+<body>
+<header>
+  <a class="brand" href="../">Saddle <span>&amp;</span> Spoke</a>
+  <span class="tag">Conformance checker</span>
+</header>
+<main>
+  <h1>Does that site conform?</h1>
+  <p class="lede">Point this at any agentic website. It runs the seven interoperability checks from
+     §6 of <em>MVP Profile 0.2</em> that can be observed from outside the site, and tells you
+     exactly which files answered and which did not. Nothing is installed, nothing is sent anywhere
+     except the site you name.</p>
+
+  <form id="form">
+    <label for="url">Agent network URL, or a site base</label>
+    <div class="row">
+      <input id="url" type="url" spellcheck="false" placeholder="https://example.org/agents/transit">
+      <button id="run" type="submit">Check</button>
+    </div>
+    <p class="hint">The last path component is treated as the network name, and the folder above it as
+       the site base — the convention the specification uses. A bare origin checks the first network
+       the manifest lists.</p>
+  </form>
+
+  <section id="report" hidden>
+    <div class="summary" id="summary"></div>
+    <ol class="results" id="results"></ol>
+    <details>
+      <summary>Machine-readable report</summary>
+      <pre id="json"></pre>
+    </details>
+  </section>
+
+  <section class="about">
+    <h2>What it can and cannot see</h2>
+    <p>It can see: whether the manifest and definition are reachable from another origin, whether the
+       name matches exactly, whether the document is data-only and structurally valid, and whether a
+       peer link map exists.</p>
+    <p>It cannot see: whether the site's runtime runs the network correctly, whether consent is asked,
+       or whether private context is filtered. Those need a runtime. The <a href="../">workshop</a>
+       demonstrates all seven in its Inspector.</p>
+    <p>Built for the Open Agentic Web Challenge. MIT licensed; the source is in the same repository
+       under <code>check/</code>.</p>
+  </section>
+</main>
+</body>
+</html>

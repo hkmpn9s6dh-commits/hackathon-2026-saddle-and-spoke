@@ -1,0 +1,24 @@
+{
+  "_comment": "Deliberately invalid: the front agent does not exist, one agent is defined twice, and one reference points at nothing. The runtime must refuse this before any model call.",
+  "metadata": { "description": "A broken network, kept as a fixture for the fail-closed check." },
+  "tools": [
+    {
+      "name": "front_desk",
+      "function": { "description": "Takes the request." },
+      "instructions": "Delegate.",
+      "tools": ["workshop_lead", "ghost_agent"]
+    },
+    {
+      "name": "workshop_lead",
+      "function": { "description": "Does the work." },
+      "instructions": "Work.",
+      "tools": []
+    },
+    {
+      "name": "workshop_lead",
+      "function": { "description": "A second agent with the same name." },
+      "instructions": "Work.",
+      "tools": []
+    }
+  ]
+}
