@@ -5,3 +5,6 @@ video/raw.webm
 video/tmp/
 *.log
 .DS_Store
+video/raw/
+video/*.mp4
+submission/*.zip
