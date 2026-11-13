@@ -341,7 +341,18 @@ body {
 
 .empty-line { font: italic 400 13.5px var(--serif); color: var(--steel); margin: 2px 0 6px; }
 
-.total { margin-top: 14px; padding-top: 12px; border-top: 3px double var(--rule); display: flex; align-items: baseline; justify-content: space-between; }
+.total {
+  position: sticky;
+  bottom: -1px;
+  margin-top: 14px;
+  padding: 12px 0 10px;
+  border-top: 3px double var(--rule);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  background: var(--paper-2);
+  z-index: 2;
+}
 .total .amount { font: 600 32px/1 var(--serif); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
 .total .amount .cur { font-size: 20px; }
 .total .sub { font: 400 10.5px/1.6 var(--mono); color: var(--ink-3); text-align: right; letter-spacing: 0.04em; }
@@ -426,7 +437,7 @@ body {
 }
 .composer button:disabled { opacity: 0.4; cursor: default; }
 
-.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; padding-bottom: 2px; }
 .chip {
   appearance: none;
   border: 1px solid var(--rule);
@@ -578,6 +589,7 @@ pre.code {
   .drawing { padding: 18px 20px 0; }
   .sheet { overflow: visible; max-height: none; }
   .notes-body { max-height: 190px; }
+  .total { position: static; }
   .mark-sub { display: none; }
 }
 

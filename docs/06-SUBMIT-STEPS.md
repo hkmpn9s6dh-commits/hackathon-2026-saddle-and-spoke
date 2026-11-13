@@ -37,7 +37,7 @@ A bicycle workshop that publishes itself as an agent network. Describe a fault; 
 5. **Video demo**: paste the YouTube URL once it is uploaded and set to *Public* or
    *Unlisted*. Not *Private*: judges cannot open a private video.
 6. **Image gallery**: upload, in this order —
-   `submission/shot-01-bench.jpg`, `shot-02-checks.jpg`, `submission/shot-03-peer.jpg`.
+   `submission/shot-01-bench.jpg`, `submission/shot-02-checks.jpg`, `submission/shot-03-peer.jpg`.
 7. **"Try it out" links** — add all three:
    - `https://hkmpn9s6dh-commits.github.io/hackathon-2026-saddle-and-spoke/`
    - `https://github.com/hkmpn9s6dh-commits/hackathon-2026-saddle-and-spoke`
