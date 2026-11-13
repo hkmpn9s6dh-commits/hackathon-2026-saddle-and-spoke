@@ -115,22 +115,56 @@ The four refusals, in the runtime's own words (from the live run):
 | Browser checks | 29 |
 | Screenshots | `proof/shots/` (JPEG, 2×) |
 
+## Gate C — recorded
+
+`proof/clone-check.md` holds the clone, the install and the full run. It also records the
+bug that clone caught: on Windows the checkout rewrote the published artifacts with CRLF,
+so the HOCON peer and its JSON serialisation were no longer byte-equal inside a triple-quoted
+string. `.gitattributes` now pins LF and the test normalises line endings. Running
+`verify.sh` on the machine that wrote the files could never have found it.
+
 ## Gate D — blind ranking
 
-**Status: awaiting the judge's answer.** AME-1362 (assigned to a GPT-family agent that did
-not build this) holds the six lettered screenshots and the instruction.
+**One judge has answered; the second is still running.** Both were asked the same question
+with the same six lettered screenshots and no other context.
 
-The set is `proof/rank/`: A teenage.engineering, B are.na, C the organisers' pizza example,
-D this site, E worldwideagenticweb.org, F linear.app. The letters were shuffled from a fixed
-seed (2026-11-13) — `order.json` holds the mapping and was not consulted by the judge.
+### Judge 1 — GPT-5.6 (did not build this), 2026-11-13 15:29
 
-Pass condition: ranked above at least three of the five references, by at least two judges
-from different model families that did not build it.
+| Rank | Letter | What it is | The judge's reason |
+| --- | --- | --- | --- |
+| 1 | A | teenage.engineering | "dramatic product photography and high-contrast black; the strongest visual landing point" |
+| 2 | **D** | **Saddle & Spoke** | "the bicycle line drawing, the job sheet and the restrained editorial typography build a distinctive scene; complete hierarchy, high recognition" |
+| 3 | E | worldwideagenticweb.org | "huge headline, generous space, two clear buttons — but reads as a generic event page" |
+| 4 | C | the organisers' pizza example | "brand, claim, menu and order area are understood instantly; the form density weakens the first-screen impact" |
+| 5 | B | are.na | "clear hierarchy and bold whitespace, but the visual content and landing point are weak" |
+| 6 | F | linear.app | (see the note below — this capture was blank) |
 
-The layout and the cover were built before the ranking came back, on the record: the video
-is a picture lock with no narration, and `scripts/cover.mjs` regenerates the cover in one
-command. If gate D fails, the composition changes and both are re-cut — that is the cost of
-having run ahead, and it is cheaper than shipping an unreviewed first screen.
+**Result: ranked above four of the five references, and above three of them (E, C, B) even
+with F and A discounted.** The pass condition is "above at least three".
+
+Note on F: the first capture of linear.app returned before its hero rendered, so the judge
+ranked an empty black page. It has since been replaced with a real capture in `proof/rank/F.jpg`;
+the judge's placement of F is therefore discounted, and D's position above E, C and B stands
+on its own.
+
+### Judge 2 — a GLM-family agent (AME-1364)
+
+Asked at 15:39 with the same packet. The Opus-family agent first assigned (AME-1363) could
+not run — its OAuth session on that machine is expired, which is a standing problem on this
+fleet, not a fault in the packet.
+
+### The set
+
+`proof/rank/`: A teenage.engineering, B are.na, C the organisers' pizza example, D this site,
+E worldwideagenticweb.org, F linear.app. Letters were shuffled from a fixed seed
+(2026-11-13); `order.json` holds the mapping and neither judge was given it.
+
+### Order of work, on the record
+
+The layout and the cover were built before the ranking came back: the video is a picture lock
+with no narration, and `scripts/cover.mjs` regenerates the cover in one command. If gate D
+fails, the composition changes and both are re-cut. That is the cost of having run ahead, and
+it is cheaper than shipping an unreviewed first screen.
 
 ## What is not proven
 
@@ -140,4 +174,4 @@ having run ahead, and it is cheaper than shipping an unreviewed first screen.
   key is present.
 - **MCP.** The client is implemented and fails closed; no MCP server is referenced by the
   published network, so no call was made in the demo.
-- **Two judges.** One is arranged; the second is not.
+- **A second judge.** Arranged, running, not yet answered.
