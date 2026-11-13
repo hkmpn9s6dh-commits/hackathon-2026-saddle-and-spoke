@@ -305,6 +305,7 @@ async function ask(text: string): Promise<void> {
   const trimmed = text.trim()
   if (!trimmed) return
   busy = true
+  document.getElementById('idle')?.remove()
   send.disabled = true
   lamp.classList.add('is-live')
   $('#benchSub').textContent = 'running'
@@ -596,6 +597,10 @@ async function boot(): Promise<void> {
     'Morning. The kettle is on. Ask me about a repair and I will price it from the book, or tell me a ticket number and I will see where your bike is.',
     'front desk',
   )
+  // The greeting reads first; the published-graph card sits under it.
+  const idle = document.getElementById('idle')
+  if (idle) transcript.append(idle)
+
   try {
     const rawManifest = await fetchJson('agent-manifest.json')
     const check = validateManifest(rawManifest)

@@ -499,10 +499,21 @@ export class AgentRuntime {
   private peerAllowed(origin: string): { ok: true } | { ok: false; error: string } {
     const p = this.opts.peerPolicy
     if (!p) return { ok: true }
-    if (p.deny.includes(origin)) {
+    // Publishers list peer URLs; the check is on origins, so compare like with like.
+    const origins = (list: string[]) =>
+      new Set(
+        list.map((entry) => {
+          try {
+            return new URL(entry).origin
+          } catch {
+            return entry
+          }
+        }),
+      )
+    if (origins(p.deny).has(origin)) {
       return { ok: false, error: `This site's peer policy denies ${origin}. Nothing was contacted.` }
     }
-    if (p.mode === 'closed' && !p.allow.includes(origin)) {
+    if (p.mode === 'closed' && !origins(p.allow).has(origin)) {
       return {
         ok: false,
         error: `This site's peer policy is closed. ${origin} is not on the allow list, so the runtime stopped before contacting it.`,

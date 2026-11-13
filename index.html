@@ -109,6 +109,8 @@
                   <line x1="760" y1="310" x2="760" y2="292" class="thin" />
                 </g>
 
+                <ellipse cx="240" cy="549" rx="44" ry="3.4" class="shadow" />
+                <ellipse cx="760" cy="549" rx="44" ry="3.4" class="shadow" />
                 <line x1="100" y1="548" x2="900" y2="548" class="ground" />
               </g>
             </svg>
@@ -134,13 +136,13 @@
                 <div><dt>Ready</dt><dd id="jobReady">—</dd></div>
               </dl>
             </article>
-            <article class="pricecard">
-              <h2>Bench rates</h2>
-              <p>Labour <b>£45</b>/hour, in half-hour blocks.</p>
-              <p>Parts at list. No payment online — pay when you collect.</p>
-              <p class="pricecard-foot">Closed Sun–Mon.</p>
-            </article>
           </div>
+            <article class="pricecard">
+                <h2>Bench rates</h2>
+                <p>Labour <b>£45</b>/hour, in half-hour blocks.</p>
+                <p>Parts at list. No payment online — pay when you collect.</p>
+                <p class="pricecard-foot">Closed Sun–Mon.</p>
+              </article>
         </section>
 
         <section class="bench" aria-label="The bench">
@@ -152,7 +154,19 @@
             <span class="lamp" id="lamp" aria-hidden="true"></span>
           </header>
 
-          <div class="transcript" id="transcript" role="log" aria-live="polite"></div>
+          <div class="transcript" id="transcript" role="log" aria-live="polite">
+            <div class="idle" id="idle">
+              <p class="idle-kicker">This page publishes</p>
+              <p class="idle-net">saddle_and_spoke</p>
+              <ul class="idle-tree">
+                <li><b>front_desk</b><span>the front man</span></li>
+                <li class="ind"><b>workshop_lead</b><span>price, bench, the drawing</span></li>
+                <li class="ind"><b>parts_desk</b><span>the shelf, then the trade counter</span></li>
+                <li class="ind peer"><b>bellwether_parts</b><span>another origin · 2 agents</span></li>
+              </ul>
+              <p class="idle-foot">3 agents here · 1 peer site · 7 site actions · runs in this tab</p>
+            </div>
+          </div>
 
           <form class="composer" id="composer">
             <label class="sr-only" for="say">Ask the shop</label>
