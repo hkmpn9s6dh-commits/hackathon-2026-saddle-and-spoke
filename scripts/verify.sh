@@ -90,7 +90,7 @@ fi
 
 if [ $FAST -eq 0 ]; then
   if node scripts/e2e.mjs >/tmp/ss-e2e.log 2>&1; then
-    ok "browser end-to-end (29 checks)"
+    ok "browser end-to-end (31 checks)"
   else
     bad "browser end-to-end"
     tail -24 /tmp/ss-e2e.log

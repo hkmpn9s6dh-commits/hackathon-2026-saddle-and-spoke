@@ -143,6 +143,13 @@ async function main() {
   }
   ok("three agents are published", (await page.evaluate(() => [...window.__saddle.network.agents.keys()])).length === 3);
   ok("the drawing is mounted", (await page.locator("#bike-holder svg.bike").count()) === 1);
+  const layout = await page.evaluate(() => {
+    const desk = document.querySelector(".desk")?.getBoundingClientRect();
+    const body = getComputedStyle(document.body);
+    return { deskWidth: Math.round(desk?.width ?? 0), fontSize: parseFloat(body.fontSize), family: body.fontFamily };
+  });
+  ok("the two columns get their share of a 1440 screen", layout.deskWidth > 520, `${layout.deskWidth}px`);
+  ok("the page's own typography is in force", Math.abs(layout.fontSize - 15.5) < 0.2, `${layout.fontSize}px ${layout.family}`);
   await page.screenshot({ path: `${OUT}/01-boot.jpg` });
 
   // ── 1. a full job, from complaint to booking ─────────────────────

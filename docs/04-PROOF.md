@@ -35,7 +35,7 @@ the peer HOCON has no include or substitution            PASS
 visitor-facing copy is English                           PASS
 no credentials in the repository                         PASS
 no third-party analytics                                 PASS
-browser end-to-end (29 checks)                           PASS
+browser end-to-end (31 checks)                           PASS
 ```
 
 The 32 unit checks are in `test/network.test.ts` (16) and `test/runtime.test.ts` (16). They
@@ -61,7 +61,7 @@ the loopback peer that `verify.sh` starts itself).
 ## The seven interoperability checks, on the live site
 
 `scripts/e2e.mjs` against `https://hkmpn9s6dh-commits.github.io/hackathon-2026-saddle-and-spoke/`,
-2026-11-13 — **29 checks, 0 failed**:
+2026-11-13 — **31 checks, 0 failed**:
 
 ```
 PASS  the page boots and validates its own network
@@ -112,7 +112,7 @@ The four refusals, in the runtime's own words (from the live run):
 | Images | none |
 | Requests on first load | 9 |
 | Unit checks | 32 |
-| Browser checks | 29 |
+| Browser checks | 31 |
 | Screenshots | `proof/shots/` (JPEG, 2×) |
 
 ## Gate C — recorded
@@ -147,11 +147,34 @@ ranked an empty black page. It has since been replaced with a real capture in `p
 the judge's placement of F is therefore discounted, and D's position above E, C and B stands
 on its own.
 
-### Judge 2 — a GLM-family agent (AME-1364)
+### Judge 2 — GLM-5.3-Flash (did not build this), 2026-11-13 15:48
 
-Asked at 15:39 with the same packet. The Opus-family agent first assigned (AME-1363) could
-not run — its OAuth session on that machine is expired, which is a standing problem on this
-fleet, not a fault in the packet.
+"All six images seen." Ranked by "how likely I am to stop on this first screen":
+
+| Rank | Letter | What it is | The judge's reason |
+| --- | --- | --- | --- |
+| 1 | A | teenage.engineering | "a single lit object in black space, nothing else — you know who the subject is at once" |
+| 2 | F | linear.app | "a big headline over a real product screenshot; hierarchy and typography almost faultless, but the dark-hero formula is common in galleries" |
+| 3 | **D** | **Saddle & Spoke** | (no note, but placed above C, E and B) |
+| 4 | C | the organisers' pizza example | |
+| 5 | E | worldwideagenticweb.org | |
+| 6 | B | are.na | "no visual landing point anywhere on the screen; a default-weight list on white, like an unstyled draft" |
+
+**Result: ranked above three of the five references (C, E, B).**
+
+### Verdict
+
+| Judge | Family | Rank of D | References below D | Passes |
+| --- | --- | --- | --- | --- |
+| 1 | GPT-5.6 | 2 / 6 | A only above it; E, C, B, F below | yes (4 ≥ 3) |
+| 2 | GLM-5.3-Flash | 3 / 6 | C, E, B below | yes (3 ≥ 3) |
+
+**Gate D passes**: two judges from different model families, neither of which built the site,
+each ranked it above at least three of the five references. Both put the same two references
+above it, and both put the organisers' example and the challenge's own site below it — which
+is the comparison that matters for this submission.
+
+The design therefore stands as built: the video and the cover do not need re-cutting.
 
 ### The set
 
@@ -162,9 +185,9 @@ E worldwideagenticweb.org, F linear.app. Letters were shuffled from a fixed seed
 ### Order of work, on the record
 
 The layout and the cover were built before the ranking came back: the video is a picture lock
-with no narration, and `scripts/cover.mjs` regenerates the cover in one command. If gate D
-fails, the composition changes and both are re-cut. That is the cost of having run ahead, and
-it is cheaper than shipping an unreviewed first screen.
+with no narration, and `scripts/cover.mjs` regenerates the cover in one command. Had gate D
+failed, the composition would have changed and both would have been re-cut. It passed, so
+nothing was wasted — but the order was wrong, and it is recorded here rather than tidied away.
 
 ## What is not proven
 
@@ -174,4 +197,4 @@ it is cheaper than shipping an unreviewed first screen.
   key is present.
 - **MCP.** The client is implemented and fails closed; no MCP server is referenced by the
   published network, so no call was made in the demo.
-- **A second judge.** Arranged, running, not yet answered.
+

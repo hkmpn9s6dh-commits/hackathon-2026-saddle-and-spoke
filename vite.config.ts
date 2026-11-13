@@ -11,7 +11,9 @@ export default defineConfig({
   build: {
     target: "es2022",
     assetsInlineLimit: 4096,
-    cssCodeSplit: false,
+    // Two pages with different sheets: the checker's `main { max-width }` must not leak
+    // into the shop page, so each entry keeps its own CSS.
+    cssCodeSplit: true,
     reportCompressedSize: false,
     rollupOptions: {
       input: {

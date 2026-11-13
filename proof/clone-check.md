@@ -39,7 +39,7 @@ the peer HOCON has no substitution                   PASS
 visitor-facing copy is English                       PASS
 no credentials in the repository                     PASS
 no third-party analytics                             PASS
-browser end-to-end (29 checks)                       PASS
+browser end-to-end (31 checks)                       PASS
 ---------------------------------------------------------------
 all checks passed
 ```
