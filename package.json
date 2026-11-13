@@ -1,0 +1,23 @@
+{
+  "name": "saddle-and-spoke",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Saddle & Spoke — a bicycle workshop that publishes itself as an agent network.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 4173 --strictPort",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit --pretty false",
+    "serve": "node scripts/serve.mjs",
+    "e2e": "node scripts/e2e.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "playwright-core": "^1.65.0",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10",
+    "vitest": "^2.1.4"
+  }
+}

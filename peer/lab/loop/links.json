@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "networks": {
+    "spare_room": {
+      "saddle_and_spoke": "https://example.com/saddle_and_spoke"
+    }
+  }
+}

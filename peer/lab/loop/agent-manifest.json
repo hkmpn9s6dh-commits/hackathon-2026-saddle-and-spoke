@@ -1,0 +1,13 @@
+{
+  "brand": "Loop fixture",
+  "networks": [
+    {
+      "name": "spare_room",
+      "front_man": "counter",
+      "hocon": "./spare_room.hocon",
+      "description": "A fixture whose network calls Saddle & Spoke back. Used to prove the runtime stops a composition cycle."
+    }
+  ],
+  "peer_policy": { "mode": "open" },
+  "deployment": { "mode": "static", "self_contained_runtime": false }
+}

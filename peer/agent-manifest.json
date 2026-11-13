@@ -1,0 +1,52 @@
+{
+  "brand": "Spare Room",
+  "site": {
+    "name": "Spare Room",
+    "kind": "parts co-op",
+    "address": "Unit 4, Bramley Yard, Leeds",
+    "description": "A not-for-profit parts co-op. It answers shops, not customers."
+  },
+  "networks": [
+    {
+      "name": "spare_room",
+      "front_man": "counter",
+      "hocon": "./spare_room.hocon",
+      "description": "Stock, lead time to KA21, and trade price for a bicycle part.",
+      "tags": ["peer", "static", "hocon"],
+      "sample_queries": ["Do you have a 50T 110 BCD 5-arm chainring? Lead time and trade price to KA21."]
+    }
+  ],
+  "llm_router": {
+    "base_url": "https://router.spare-room.example/v1",
+    "model": "coop-counter-1",
+    "mock": true,
+    "note": "Informational only. A caller runtime must keep its own router and model: this value is never used when Spare Room is composed into someone else's page, and no caller key is ever sent here."
+  },
+  "allowed_peers": [],
+  "peer_policy": {
+    "mode": "closed",
+    "deny_origins": [],
+    "note": "The co-op calls nobody."
+  },
+  "linking": {
+    "protocol": "nsdeploy-link/v1",
+    "exports": [
+      {
+        "network": "spare_room",
+        "front_man": "counter",
+        "aliases": ["spare_room", "counter"],
+        "url": "spare_room"
+      }
+    ],
+    "link_updates": { "mode": "browser-local" }
+  },
+  "deployment": {
+    "mode": "static",
+    "self_contained_runtime": false,
+    "browser_mock": true,
+    "direct_byok": false,
+    "direct_mcp_requires_cors": true,
+    "public_mcp_facade": false,
+    "note": "This site publishes artifacts only. It is composed into a caller's runtime."
+  }
+}

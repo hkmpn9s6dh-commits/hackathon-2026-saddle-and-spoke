@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saddle &amp; Spoke — a workshop that answers agents</title>
+<meta name="description" content="A bicycle workshop in Saltcoats that publishes its job sheet as an open agent network. Describe a fault; the page diagnoses it, prices it, and books the bench.">
+<meta name="theme-color" content="#f2eee4">
+<meta property="og:title" content="Saddle &amp; Spoke — a workshop that answers agents">
+<meta property="og:description" content="An open agentic website: the drawing annotates itself, the job sheet is written by agents, and a peer parts co-op answers without ever seeing your details.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f2eee4'/%3E%3Ccircle cx='9' cy='21' r='6' fill='none' stroke='%231c1916' stroke-width='2'/%3E%3Ccircle cx='24' cy='21' r='6' fill='none' stroke='%231c1916' stroke-width='2'/%3E%3Cpath d='M9 21 L14 12 h8 l-4 9' fill='none' stroke='%23b4441f' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="boot" id="boot">
+  <div class="boot-inner">
+    <span class="wordmark">Saddle <span class="amp">&amp;</span> Spoke</span>
+    <p id="boot-line">reading the published network…</p>
+    <div class="bar"><i></i></div>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="mark">
+    <span class="wordmark">Saddle <span class="amp">&amp;</span> Spoke</span>
+    <span class="mark-sub" id="mark-sub">Bicycle repair · 11 Quay Street, Saltcoats · Thu 16–20, Sat 09–13</span>
+  </div>
+  <div class="tools">
+    <span class="ghost" id="router-badge" title="Which model is answering"><span class="dot" id="router-dot"></span><span id="router-name">replay</span></span>
+    <button class="ghost" id="open-inspector" aria-pressed="false" aria-controls="inspector">Inspector</button>
+    <button class="ghost" id="open-settings" aria-pressed="false" aria-controls="settings">Model</button>
+  </div>
+</header>
+
+<main class="bench">
+  <section class="drawing" aria-label="The drawing and the bench">
+    <div class="drawing-head">
+      <span class="label">The bench</span>
+      <p class="drawing-note">Every part the workshop names is drawn on here, in place, with its stock and price.</p>
+    </div>
+    <div class="bike-holder" id="bike-holder"></div>
+    <div class="callout-holder" id="callouts" aria-live="polite"></div>
+    <div class="shelf">
+      <div class="shelf-head">
+        <span class="label">On the bench</span>
+        <span class="shelf-count" id="bench-count">nothing yet</span>
+      </div>
+      <ul class="bench-items" id="bench-items">
+        <li class="bench-empty">Parts the workshop sets aside appear here, with the bin they came from.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="desk" aria-label="Job sheet and counter">
+    <div class="sheet" id="sheet">
+      <header class="sheet-head">
+        <div>
+          <span class="label">Job sheet</span>
+          <p class="jobno">No. <span id="job-number">0417</span></p>
+        </div>
+        <div class="sheet-meta">
+          <div class="stamp" id="stamp" aria-hidden="true"></div>
+              <b id="sheet-date">Fri 13 Nov</b>
+          <span id="sheet-state">Open</span>
+        </div>
+      </header>
+
+      <div class="field" id="field-complaint">
+        <span class="label">Complaint</span>
+        <p class="empty" id="complaint-text">Nothing written yet. Tell the counter what the bike is doing.</p>
+      </div>
+
+      <section class="section">
+        <h2 class="section-title">Findings <span class="count" id="finding-count"></span></h2>
+        <ol class="findings" id="findings"><li class="empty-line">Nothing recorded yet.</li></ol>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Parts</h2>
+        <table class="lines" id="parts-lines"><tbody></tbody></table>
+        <p class="empty-line" id="parts-empty">No parts set aside.</p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Labour</h2>
+        <table class="lines" id="labour-lines"><tbody></tbody></table>
+        <p class="empty-line" id="labour-empty">No labour quoted.</p>
+      </section>
+
+      <div class="total">
+        <span class="label">Total</span>
+        <div>
+          <div class="amount"><span class="cur">£</span><span id="total-amount">0.00</span></div>
+          <div class="sub" id="total-sub">bench rate £48/hour</div>
+        </div>
+      </div>
+
+      <div class="slot-held" id="slot-held" hidden>
+        <span class="peg"></span><span id="slot-text"></span>
+      </div>
+
+    </div>
+
+    <section class="notes" aria-label="Counter">
+      <div class="notes-head">
+        <span class="label">Counter</span>
+        <span class="notes-state" id="notes-state">waiting for you</span>
+      </div>
+      <div class="notes-body" id="notes" role="log" aria-live="polite"></div>
+      <form class="composer" id="composer" autocomplete="off">
+        <label class="sr-only" for="input">What is the bike doing?</label>
+        <input id="input" name="input" placeholder="Third gear jumps when I push hard uphill…" maxlength="300" autocomplete="off">
+        <button type="submit" id="send">Send</button>
+      </form>
+      <div class="chips" id="chips"></div>
+    </section>
+  </section>
+</main>
+
+<div class="scrim" id="scrim"></div>
+
+<aside class="drawer" id="inspector" aria-label="Inspector" aria-hidden="true">
+  <div class="drawer-head">
+    <span class="drawer-title">Inspector</span>
+    <button class="btn" id="close-inspector">Close</button>
+  </div>
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" data-panel="checks" aria-selected="true">Checks</button>
+    <button class="tab" role="tab" data-panel="trace" aria-selected="false">Trace</button>
+    <button class="tab" role="tab" data-panel="network" aria-selected="false">Network</button>
+    <button class="tab" role="tab" data-panel="privacy" aria-selected="false">Privacy</button>
+    <button class="tab" role="tab" data-panel="receipts" aria-selected="false">Receipts</button>
+  </div>
+  <div class="drawer-body" id="inspector-body">
+    <section class="panel on" data-panel="checks" id="panel-checks"></section>
+    <section class="panel" data-panel="trace" id="panel-trace"></section>
+    <section class="panel" data-panel="network" id="panel-network"></section>
+    <section class="panel" data-panel="privacy" id="panel-privacy"></section>
+    <section class="panel" data-panel="receipts" id="panel-receipts"></section>
+  </div>
+</aside>
+
+<aside class="drawer" id="settings" aria-label="Model settings" aria-hidden="true">
+  <div class="drawer-head">
+    <span class="drawer-title">AI model settings</span>
+    <button class="btn" id="close-settings">Close</button>
+  </div>
+  <div class="drawer-body" id="settings-body"></div>
+</aside>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-card">
+    <h2 id="modal-title">Approve?</h2>
+    <p class="sub" id="modal-sub"></p>
+    <div class="body" id="modal-body"></div>
+    <div class="modal-actions" id="modal-actions"></div>
+  </div>
+</div>
+
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>

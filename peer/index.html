@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spare Room — parts co-op, Leeds</title>
+<meta name="description" content="Spare Room is a not-for-profit bicycle parts co-op. It publishes its counter as an agent network.">
+<style>
+  :root { --paper:#f4f1ea; --ink:#1e1b18; --oxide:#8c3f22; --steel:#6e7478; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink);
+         font:400 17px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 56px 28px 96px; }
+  .eyebrow { font:500 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing:.14em;
+             text-transform:uppercase; color:var(--oxide); }
+  h1 { font:600 46px/1.05 Georgia, "Times New Roman", serif; margin:14px 0 10px; letter-spacing:-.01em; }
+  p { color:#3a352f; max-width: 56ch; }
+  .rule { height:1px; background:rgba(30,27,24,.16); margin:34px 0; }
+  dl { display:grid; grid-template-columns: 150px 1fr; gap:10px 18px; font-size:15px; }
+  dt { color:var(--steel); font:500 12px/1.5 ui-monospace, monospace; text-transform:uppercase; letter-spacing:.08em; }
+  dd { margin:0; }
+  code { font:400 13px/1.5 ui-monospace, monospace; background:rgba(30,27,24,.06); padding:2px 6px; border-radius:3px; }
+  a { color:var(--oxide); }
+  .note { border-left:2px solid var(--oxide); padding:2px 0 2px 16px; color:#4a443d; font-size:15px; }
+  footer { margin-top:56px; font-size:13px; color:var(--steel); }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <p class="eyebrow">Parts co-op · Unit 4, Bramley Yard, Leeds</p>
+  <h1>Spare Room</h1>
+  <p>We keep the bins that small workshops cannot. We do not sell to the public, and we do not run a chat window:
+     our counter answers <em>agents</em>, in the browser of whoever is asking.</p>
+
+  <div class="rule"></div>
+
+  <dl>
+    <dt>Network</dt><dd><code>spare_room</code></dd>
+    <dt>Front agent</dt><dd><code>counter</code></dd>
+    <dt>Manifest</dt><dd><a href="./agent-manifest.json">agent-manifest.json</a></dd>
+    <dt>Definition</dt><dd><a href="./spare_room.hocon">spare_room.hocon</a> · <a href="./spare_room.network.json">JSON</a></dd>
+    <dt>Peer URL</dt><dd><code>…/peer/spare_room</code></dd>
+    <dt>Speaks</dt><dd>Stock, lead time to KA21, trade price. Nothing else.</dd>
+  </dl>
+
+  <div class="rule"></div>
+
+  <p class="note">This site is composed into a caller's page: the caller's runtime fetches the manifest,
+     matches the network name exactly, loads the definition, and runs it locally with the caller's own model router.
+     Spare Room never receives a visitor's key, a customer's name, or a phone number.</p>
+
+  <footer>Saddle &amp; Spoke, Saltcoats, is the workshop that calls us. <a href="https://github.com/hkmpn9s6dh-commits/hackathon-2026-saddle-and-spoke">Source</a> · MIT</footer>
+</main>
+</body>
+</html>

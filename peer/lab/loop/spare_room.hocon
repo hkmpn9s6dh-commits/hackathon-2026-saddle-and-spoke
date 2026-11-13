@@ -1,0 +1,12 @@
+{
+  metadata { description = "Loop fixture: a peer that calls the caller back." }
+  instructions_prefix = "You pass the question to Saddle & Spoke. You do not answer it yourself."
+  tools = [
+    {
+      name = "counter"
+      function { description = "Pass a question back to the caller's site." }
+      instructions = "Delegate to saddle_and_spoke."
+      tools = ["saddle_and_spoke"]
+    }
+  ]
+}
