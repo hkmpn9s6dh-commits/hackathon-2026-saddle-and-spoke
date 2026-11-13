@@ -109,7 +109,7 @@ async function main() {
     await waitFor(`http://127.0.0.1:${PEER_PORT}/agent-manifest.json`);
   }
   const base = external ?? `http://127.0.0.1:${SITE_PORT}/`;
-  const peerOrigin = new URL(`http://127.0.0.1:${PEER_PORT}/`).origin;
+  const siteOrigin = new URL(base).origin;
 
   const browser = await chromium.launch({ executablePath: CHROME, headless: true });
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 });
@@ -120,7 +120,8 @@ async function main() {
   });
   page.on("pageerror", (error) => consoleErrors.push(String(error)));
   page.on("request", (request) => {
-    if (request.url().startsWith(peerOrigin)) {
+    // Anything that is not our own origin, and is one of the published artifacts.
+    if (!request.url().startsWith(siteOrigin) && /agent-manifest\.json|links\.json|\.hocon|\.network\.json/.test(request.url())) {
       peerRequests.push({ url: request.url(), headers: request.headers() });
     }
   });

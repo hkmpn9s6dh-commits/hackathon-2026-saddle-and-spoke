@@ -1,0 +1,11 @@
+import { chromium } from "playwright-core";
+import path from "node:path";
+import { homedir } from "node:os";
+const exe = process.env.CHROME_PATH ?? path.join(homedir(), "AppData/Local/Google/Chrome/Application/chrome.exe");
+const browser = await chromium.launch({ executablePath: exe, headless: true });
+const page = await browser.newPage({ viewport: { width: 1100, height: 760 }, deviceScaleFactor: 2 });
+await page.goto(process.env.PEER_URL ?? "http://127.0.0.1:5174/", { waitUntil: "networkidle" });
+await page.waitForTimeout(600);
+await page.screenshot({ path: "submission/shot-03-peer.jpg", type: "jpeg", quality: 88 });
+await browser.close();
+console.log("wrote submission/shot-03-peer.jpg");
